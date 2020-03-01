@@ -1,0 +1,12 @@
+pages:
+  stage: deploy
+  script:
+  - mkdir .public
+  - cp -ar * .public
+  - mv .public public
+  - find public -type f -regex '.*\.\(xhtml\|htm\|html\|txt\|js\|css\|ico\)$' -exec gzip -9 -f -k {} \;
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
